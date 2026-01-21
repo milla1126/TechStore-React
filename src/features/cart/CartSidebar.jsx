@@ -2,6 +2,7 @@ import React from 'react';
 import { useCart } from '../../context/CartContext';
 import { Button } from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
+import { formatPrice } from '../../utils/format';
 
 export const CartSidebar = () => {
     const {
@@ -128,7 +129,7 @@ export const CartSidebar = () => {
                                                     +
                                                 </button>
                                             </div>
-                                            <span style={{ fontWeight: 'bold' }}>${(item.price * item.quantity).toFixed(2)}</span>
+                                            <span style={{ fontWeight: 'bold' }}>{formatPrice(item.price * item.quantity)}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +143,7 @@ export const CartSidebar = () => {
                     <div style={{ padding: '1.5rem', borderTop: '1px solid var(--color-bg-surface)', backgroundColor: 'var(--color-bg-card)' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', fontSize: '1.125rem', fontWeight: 'bold' }}>
                             <span>Total</span>
-                            <span>${getCartTotal().toFixed(2)}</span>
+                            <span>{formatPrice(getCartTotal())}</span>
                         </div>
                         <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '1rem', textAlign: 'center' }}>
                             IVA incluido. Envío calculado en el checkout.

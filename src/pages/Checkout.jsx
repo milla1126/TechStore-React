@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
+import { formatPrice } from '../utils/format';
 
 const SHIPPING_RATES = {
     'stgo-centro': { label: 'Santiago Centro', price: 3000 },
@@ -80,7 +81,7 @@ export const Checkout = () => {
                                     >
                                         <option value="">Selecciona tu sector...</option>
                                         {Object.entries(SHIPPING_RATES).map(([key, rate]) => (
-                                            <option key={key} value={key}>{rate.label} - ${rate.price}</option>
+                                            <option key={key} value={key}>{rate.label} - {formatPrice(rate.price)}</option>
                                         ))}
                                     </select>
                                 </div>
@@ -117,7 +118,7 @@ export const Checkout = () => {
                                 </div>
 
                                 <Button type="submit" size="lg" style={{ width: '100%' }}>
-                                    Pagar ${total.toFixed(2)}
+                                    Pagar {formatPrice(total)}
                                 </Button>
                             </form>
                         </div>
@@ -145,7 +146,7 @@ export const Checkout = () => {
                                 </div>
                                 <div style={{ flex: 1 }}>
                                     <p style={{ fontSize: '0.875rem', fontWeight: 500 }}>{item.quantity}x {item.name}</p>
-                                    <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>${(item.price * item.quantity).toFixed(2)}</p>
+                                    <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>{formatPrice(item.price * item.quantity)}</p>
                                 </div>
                             </div>
                         ))}
@@ -154,15 +155,15 @@ export const Checkout = () => {
                     <div style={{ borderTop: '1px solid var(--color-bg-surface)', paddingTop: '1rem', display: 'grid', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <span style={{ color: 'var(--color-text-secondary)' }}>Subtotal</span>
-                            <span>${getCartTotal().toFixed(2)}</span>
+                            <span>{formatPrice(getCartTotal())}</span>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <span style={{ color: 'var(--color-text-secondary)' }}>Envío</span>
-                            <span>{shippingSector ? `$${shippingCost}` : 'Calculando...'}</span>
+                            <span>{shippingSector ? formatPrice(shippingCost) : 'Calculando...'}</span>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '0.5rem', paddingTop: '0.5rem', borderTop: '1px solid var(--color-bg-surface)' }}>
                             <span style={{ color: 'var(--color-text-primary)' }}>Total</span>
-                            <span>${total.toFixed(2)}</span>
+                            <span>{formatPrice(total)}</span>
                         </div>
                     </div>
                 </div>

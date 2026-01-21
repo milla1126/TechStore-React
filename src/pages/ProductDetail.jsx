@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { products } from '../features/catalog/data';
+import { formatPrice } from '../utils/format';
 import { Button } from '../components/Button';
 import { useCart } from '../context/CartContext';
 
@@ -64,12 +65,12 @@ export const ProductDetail = () => {
                         </h1>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                             <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-text-primary)' }}>
-                                ${product.price}
+                                {formatPrice(product.price)}
                                 <span style={{ fontSize: '0.875rem', fontWeight: 'normal', color: 'var(--color-text-muted)', marginLeft: '0.5rem' }}>(IVA incluido)</span>
                             </p>
                             {product.originalPrice && (
                                 <p style={{ fontSize: '1.125rem', textDecoration: 'line-through', color: 'var(--color-text-muted)' }}>
-                                    ${product.originalPrice}
+                                    {formatPrice(product.originalPrice)}
                                 </p>
                             )}
                         </div>

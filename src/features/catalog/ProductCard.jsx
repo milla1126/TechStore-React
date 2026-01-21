@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button';
 
+import { formatPrice } from '../../utils/format';
+
 export const ProductCard = ({ product }) => {
     return (
         <div className="product-card" style={{
@@ -70,11 +72,11 @@ export const ProductCard = ({ product }) => {
                 </h3>
                 <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <p style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-primary-light)' }}>
-                        ${product.price}
+                        {formatPrice(product.price)}
                     </p>
                     {product.originalPrice && (
                         <p style={{ fontSize: '0.875rem', textDecoration: 'line-through', color: 'var(--color-text-muted)' }}>
-                            ${product.originalPrice}
+                            {formatPrice(product.originalPrice)}
                         </p>
                     )}
                 </div>
