@@ -2,7 +2,7 @@ export const products = [
     {
         id: 1,
         name: "Auriculares Noise Cancelling Pro",
-        price: 299.99,
+        price: 44.990,
         category: "Audio",
         type: "technology",
         image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80",
@@ -22,7 +22,7 @@ export const products = [
     {
         id: 2,
         name: "Smartwatch Elite Series 5",
-        price: 399.99,
+        price: 60.000,
         category: "Wearables",
         type: "technology",
         image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80",
@@ -34,7 +34,7 @@ export const products = [
             { label: "Sensores", value: "SpO2, ECG, Ritmo Cardíaco" }
         ],
         isOffer: true,
-        originalPrice: 449.99,
+        originalPrice: 80.000,
         stock: 8,
         variants: [
             { type: "color", options: ["Negro", "Oro Rosa", "Plata"] },
@@ -44,7 +44,7 @@ export const products = [
     {
         id: 3,
         name: "Laptop Ultrabook X1",
-        price: 1299.99,
+        price: 800.000,
         category: "Computación",
         type: "technology",
         image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
@@ -64,7 +64,7 @@ export const products = [
     {
         id: 4,
         name: "Combo Gamer Pro",
-        price: 199.99,
+        price: 150.000,
         category: "Gaming",
         type: "combo",
         image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&q=80",
@@ -83,7 +83,7 @@ export const products = [
     {
         id: 5,
         name: "Servicio de Instalación Premium",
-        price: 49.99,
+        price: 50.000,
         category: "Servicios",
         type: "service",
         image: "https://images.unsplash.com/photo-1581092921461-eab62e97a783?w=500&q=80",
@@ -99,7 +99,7 @@ export const products = [
     {
         id: 6,
         name: "Smartphone Flagship 2026",
-        price: 999.99,
+        price: 950.000,
         category: "Móviles",
         type: "technology",
         image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80",
