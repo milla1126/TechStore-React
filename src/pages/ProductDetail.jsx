@@ -117,18 +117,26 @@ export const ProductDetail = () => {
 
 
                     <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
-                        <Button
-                            size="lg"
-                            style={{ width: '100%' }}
-                            onClick={() => {
-                                addToCart(product, selections);
-                                // Optional: Show feedback
-                            }}
-                        >
-                            Agregar al Carrito
-                        </Button>
+                        {product.stock > 0 ? (
+                            <>
+                                <p style={{ color: product.stock < 5 ? 'var(--color-accent)' : 'var(--color-primary)', fontWeight: 'bold' }}>
+                                    Disponibles: {product.stock}
+                                </p>
+                                <Button
+                                    size="lg"
+                                    style={{ width: '100%' }}
+                                    onClick={() => {
+                                        addToCart(product, selections);
+                                    }}
+                                >
+                                    Agregar al Carrito
+                                </Button>
+                            </>
+                        ) : (
+                            <p style={{ color: 'red', fontWeight: 'bold', fontSize: '1.2rem' }}>Agotado</p>
+                        )}
 
-                        {product.category === 'Servicios' || product.category === 'Wearables' ? (
+                        {(product.stock > 0 && (product.category === 'Servicios' || product.category === 'Wearables')) ? (
                             <Button
                                 variant="outline"
                                 size="lg"

@@ -4,17 +4,32 @@ const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
+export const ROLES = {
+    CLIENT: 'client',
+    ADMIN: 'admin',
+    VENDOR: 'vendor',
+};
+
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     const login = (email) => {
-        // Mock login
-        setUser({ email, name: email.split('@')[0], plan: 'Free' });
+        // Mock login with roles
+        let role = ROLES.CLIENT;
+        if (email.includes('admin')) role = ROLES.ADMIN;
+        else if (email.includes('vendor')) role = ROLES.VENDOR;
+
+        setUser({ 
+            email, 
+            name: email.split('@')[0], 
+            role,
+            plan: 'Free' 
+        });
     };
 
     const register = (data) => {
-        // Mock register
-        setUser({ ...data, plan: 'Free' });
+        // Default to client for registration
+        setUser({ ...data, role: ROLES.CLIENT, plan: 'Free' });
     };
 
     const logout = () => {
@@ -22,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, register, logout }}>
+        <AuthContext.Provider value={{ user, login, register, logout, ROLES }}>
             {children}
         </AuthContext.Provider>
     );

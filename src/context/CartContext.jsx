@@ -33,8 +33,20 @@ export const CartProvider = ({ children }) => {
 
     const addToCart = (product, variants = {}, quantity = 1, isSubscription = false) => {
         setCartItems(prev => {
-            // Create a unique key for the item based on ID and selected variants
+            // Check if adding exceeds stock
             const variantKey = JSON.stringify(variants);
+            const existingItem = prev.find(
+                item => item.id === product.id &&
+                    JSON.stringify(item.selectedVariants) === variantKey &&
+                    item.isSubscription === isSubscription
+            );
+
+            const currentQty = existingItem ? existingItem.quantity : 0;
+            if (currentQty + quantity > product.stock) {
+                alert(`Solo hay ${product.stock} unidades disponibles.`);
+                return prev;
+            }
+
             const existingItemIndex = prev.findIndex(
                 item => item.id === product.id &&
                     JSON.stringify(item.selectedVariants) === variantKey &&

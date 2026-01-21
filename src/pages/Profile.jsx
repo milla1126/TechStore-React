@@ -58,6 +58,21 @@ export const Profile = () => {
                         }}>
                             Miembro {user.plan}
                         </span>
+                        <span style={{
+                            display: 'inline-block',
+                            marginTop: '0.5rem',
+                            marginLeft: '0.5rem',
+                            padding: '0.25rem 0.75rem',
+                            backgroundColor: user.role === 'admin' ? 'var(--color-primary)' : user.role === 'vendor' ? 'var(--color-secondary)' : 'var(--color-bg-surface)',
+                            border: '1px solid var(--color-bg-surface)',
+                            color: user.role === 'admin' ? 'white' : 'var(--color-text-primary)',
+                            borderRadius: 'var(--radius-full)',
+                            fontSize: '0.75rem',
+                            fontWeight: 600,
+                            textTransform: 'uppercase'
+                        }}>
+                            Rol: {user.role}
+                        </span>
                     </div>
                 </div>
 
@@ -74,6 +89,6 @@ export const Profile = () => {
                     Cerrar Sesión
                 </Button>
             </div>
-        </div>
+        </div >
     );
 };

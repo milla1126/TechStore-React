@@ -7,6 +7,7 @@ import { Register } from './pages/Register';
 import { Profile } from './pages/Profile';
 import { Checkout } from './pages/Checkout';
 import { OrderSuccess } from './pages/OrderSuccess';
+import { AdminDashboard } from './pages/AdminDashboard';
 
 // Placeholder Pages
 const Home = () => (
@@ -40,6 +41,7 @@ function App() {
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/success" element={<OrderSuccess />} />
+                    <Route path="/admin" element={<AdminDashboard />} />
                 </Route>
             </Routes>
         </Router>

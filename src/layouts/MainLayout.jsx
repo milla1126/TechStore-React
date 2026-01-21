@@ -72,6 +72,10 @@ export const MainLayout = () => {
             }}>
                 <div className="container">
                     <p>&copy; 2026 TechStore Inc. Todos los derechos reservados.</p>
+                    <p style={{ marginTop: '0.5rem' }}>
+                        <a href="#" style={{ color: 'var(--color-text-muted)', textDecoration: 'none' }}>Política de Privacidad</a> |
+                        <a href="#" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', marginLeft: '0.5rem' }}>Protección de Datos</a>
+                    </p>
                 </div>
             </footer>
         </div>

@@ -14,6 +14,7 @@ export const products = [
             { label: "Peso", value: "250g" },
             { label: "Cancelación de ruido", value: "Activa (ANC)" }
         ],
+        stock: 15,
         variants: [
             { type: "color", options: ["Negro Mate", "Plata", "Azul Noche"] }
         ]
@@ -34,6 +35,7 @@ export const products = [
         ],
         isOffer: true,
         originalPrice: 449.99,
+        stock: 8,
         variants: [
             { type: "color", options: ["Negro", "Oro Rosa", "Plata"] },
             { type: "size", options: ["40mm", "44mm"] }
@@ -53,6 +55,7 @@ export const products = [
             { label: "RAM", value: "16GB / 32GB" },
             { label: "Almacenamiento", value: "512GB SSD" }
         ],
+        stock: 5,
         variants: [
             { type: "color", options: ["Gris Espacial", "Plata"] },
             { type: "capacity", options: ["512GB", "1TB", "2TB"] }
@@ -72,6 +75,7 @@ export const products = [
             { label: "Mouse", value: "16000 DPI" },
             { label: "Headset", value: "7.1 Surround" }
         ],
+        stock: 20,
         variants: [
             { type: "edition", options: ["Edición Roja", "Edición Azul"] }
         ]
@@ -89,6 +93,7 @@ export const products = [
             { label: "Duración", value: "1-2 horas" },
             { label: "Cobertura", value: "Zona Metropolitana" }
         ],
+        stock: 999, // Service usually has high availability
         variants: []
     },
     {
@@ -105,6 +110,7 @@ export const products = [
             { label: "Pantalla", value: "120Hz LTPO" },
             { label: "Batería", value: "5000mAh" }
         ],
+        stock: 3,
         variants: [
             { type: "color", options: ["Titanio", "Negro", "Azul"] },
             { type: "capacity", options: ["256GB", "512GB"] }
