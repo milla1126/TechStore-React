@@ -4,11 +4,13 @@ import { products } from '../features/catalog/data';
 import { formatPrice } from '../utils/format';
 import { Button } from '../components/Button';
 import { useCart } from '../context/CartContext';
+import { AddedToCartModal } from '../features/cart/AddedToCartModal';
 
 export const ProductDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { addToCart } = useCart();
+    const [showModal, setShowModal] = useState(false);
     const product = products.find(p => p.id === parseInt(id));
 
     // State for selected variants
@@ -127,7 +129,8 @@ export const ProductDetail = () => {
                                     size="lg"
                                     style={{ width: '100%' }}
                                     onClick={() => {
-                                        addToCart(product, selections);
+                                        addToCart(product, selections, 1, false);
+                                        setShowModal(true);
                                     }}
                                 >
                                     Agregar al Carrito
@@ -173,6 +176,12 @@ export const ProductDetail = () => {
 
                 </div>
             </div>
+            {showModal && (
+                <AddedToCartModal
+                    product={product}
+                    onClose={() => setShowModal(false)}
+                />
+            )}
         </div>
     );
 };

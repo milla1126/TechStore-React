@@ -31,7 +31,7 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem('techstore_cart', JSON.stringify(cartItems));
     }, [cartItems]);
 
-    const addToCart = (product, variants = {}, quantity = 1, isSubscription = false) => {
+    const addToCart = (product, variants = {}, quantity = 1, isSubscription = false, openSidebar = true) => {
         setCartItems(prev => {
             // Check if adding exceeds stock
             const variantKey = JSON.stringify(variants);
@@ -69,7 +69,9 @@ export const CartProvider = ({ children }) => {
                 }];
             }
         });
-        setIsCartOpen(true);
+        if (openSidebar) {
+            setIsCartOpen(true);
+        }
     };
 
     const removeFromCart = (itemId, variants, isSubscription) => {

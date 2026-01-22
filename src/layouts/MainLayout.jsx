@@ -74,13 +74,13 @@ export const MainLayout = () => {
 
                     {/* User Actions - Cart & Account */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginLeft: 'auto' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: '0.75rem', cursor: 'pointer' }}>
+                        <Link to="/profile" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: '0.75rem', cursor: 'pointer', color: 'white', textDecoration: 'none' }}>
                             <span style={{ fontSize: '1.25rem' }}>👤</span>
                             <span>Mi Cuenta</span>
-                        </div>
+                        </Link>
 
                         <div
-                            onClick={() => setIsCartOpen(true)}
+                            onClick={() => navigate('/cart')}
                             style={{
                                 display: 'flex',
                                 alignItems: 'center',

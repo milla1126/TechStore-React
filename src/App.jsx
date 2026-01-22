@@ -9,6 +9,8 @@ import { Checkout } from './pages/Checkout';
 import { OrderSuccess } from './pages/OrderSuccess';
 import { AdminDashboard } from './pages/AdminDashboard';
 
+import { CartPage } from './pages/CartPage';
+
 // Placeholder Pages
 const Home = () => (
     <div className="container">
@@ -39,6 +41,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/cart" element={<CartPage />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/success" element={<OrderSuccess />} />
                     <Route path="/admin" element={<AdminDashboard />} />

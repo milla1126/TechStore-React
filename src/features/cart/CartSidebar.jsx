@@ -37,20 +37,12 @@ export const CartSidebar = () => {
 
             {/* Sidebar Panel */}
             <div style={{
-                position: 'fixed',
-                top: 0,
-                right: 0,
-                bottom: 0,
                 width: '100%',
                 maxWidth: '400px',
-                // Responsive adjustment inline (in a real app, use media queries in CSS)
-                '@media (max-width: 480px)': {
-                    maxWidth: '100vw'
-                },
                 backgroundColor: 'var(--color-bg-base)',
                 borderLeft: '1px solid var(--color-bg-surface)',
                 boxShadow: '-4px 0 20px rgba(0,0,0,0.3)',
-                zIndex: 50,
+                zIndex: 9999,
                 display: 'flex',
                 flexDirection: 'column',
                 transform: isCartOpen ? 'translateX(0)' : 'translateX(100%)',
@@ -158,7 +150,7 @@ export const CartSidebar = () => {
                         </Button>
                     </div>
                 )}
-            </div>
+            </div >
         </>
     );
 };

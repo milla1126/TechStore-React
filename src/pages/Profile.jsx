@@ -41,7 +41,7 @@ export const Profile = () => {
                         fontWeight: 'bold',
                         color: 'white'
                     }}>
-                        {user.name[0].toUpperCase()}
+                        {user?.name?.[0]?.toUpperCase() || '?'}
                     </div>
                     <div>
                         <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{user.name}</h1>
