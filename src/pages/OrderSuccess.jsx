@@ -1,8 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { Button } from '../components/Button';
 
 export const OrderSuccess = () => {
+    const location = useLocation();
+    const orderId = location.state?.orderId || 'Desconocido';
+
     return (
         <div className="container" style={{
             minHeight: '60vh',
@@ -32,8 +34,11 @@ export const OrderSuccess = () => {
                 ¡Gracias por tu compra!
             </h1>
 
-            <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.25rem', maxWidth: '500px', marginBottom: '3rem' }}>
-                Tu pedido ha sido procesado exitosamente. Te hemos enviado un correo con los detalles y el número de seguimiento.
+            <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.25rem', maxWidth: '500px', marginBottom: '1rem' }}>
+                Tu pedido <strong>#{orderId}</strong> ha sido procesado exitosamente.
+            </p>
+            <p style={{ color: 'var(--color-text-secondary)', fontSize: '1rem', maxWidth: '500px', marginBottom: '3rem' }}>
+                Te hemos enviado un correo con los detalles y el número de seguimiento.
             </p>
 
             <div style={{ display: 'flex', gap: '1rem' }}>

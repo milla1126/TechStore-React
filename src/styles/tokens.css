@@ -1,19 +1,27 @@
 /* System Design Tokens - Modern Retail (Inspired by PC Factory) */
 :root {
   /* Brand Identity - Clean & Professional */
-  --color-primary: #0056b3; /* Deep Tech Blue - Trustworthy */
-  --color-primary-dark: #004494;
-  --color-primary-light: #3378c2;
-  --color-accent: #ff6600; /* Energetic Orange - Call to Action */
-  
+  --color-primary: #9414a5;
+  /* Deep Tech Blue - Trustworthy */
+  --color-primary-dark: #5413ec;
+  --color-primary-light: #e615db;
+  --color-accent: #bd1733;
+  /* Energetic Orange - Call to Action */
+
   /* Neutral Palette - Light Theme Base */
-  --color-bg-base: #f8f9fa; /* Off-white for background comfort */
-  --color-bg-card: #ffffff; /* Pure white for cards */
-  --color-bg-surface: #e9ecef; /* Light gray for dividers/sections */
-  
-  --color-text-primary: #212529; /* Almost black */
-  --color-text-secondary: #6c757d; /* Medium gray */
-  --color-text-muted: #adb5bd; /* Light gray */
+  --color-bg-base: #f8f9fa;
+  /* Off-white for background comfort */
+  --color-bg-card: #ffffff;
+  /* Pure white for cards */
+  --color-bg-surface: #e9ecef;
+  /* Light gray for dividers/sections */
+
+  --color-text-primary: #083969;
+  /* Almost black */
+  --color-text-secondary: #000000;
+  /* Medium gray */
+  --color-text-muted: #adb5bd;
+  /* Light gray */
 
   /* Semantic Colors */
   --color-success: #198754;
@@ -22,7 +30,7 @@
 
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  
+
   /* Spacing System */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -34,19 +42,22 @@
   --space-16: 4rem;
 
   /* Dimensions */
-  --container-max-width: 1280px; /* Slightly wider for modern screens */
-  --header-height: 4.5rem; /* Taller header for search bar */
+  --container-max-width: 1280px;
+  /* Slightly wider for modern screens */
+  --header-height: 4.5rem;
+  /* Taller header for search bar */
 
   /* Effects - Modern Soft Touch */
   --radius-sm: 0.25rem;
-  --radius-md: 0.5rem; /* Softer than jagged, sharper than round */
+  --radius-md: 0.5rem;
+  /* Softer than jagged, sharper than round */
   --radius-lg: 0.75rem;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-  --shadow-hover: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+  --shadow-sm: 0 1px 3px rgba(20, 40, 153, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);

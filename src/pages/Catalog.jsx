@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { products } from '../features/catalog/data';
+import { useProducts } from '../context/ProductContext';
 import { ProductCard } from '../features/catalog/ProductCard';
 
 export const Catalog = () => {
     const [searchParams, setSearchParams] = useSearchParams();
+    const { products } = useProducts();
     const [activeCategory, setActiveCategory] = useState('Todos');
 
     useEffect(() => {

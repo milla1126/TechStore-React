@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useOrders } from '../context/OrderContext';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
 import { formatPrice } from '../utils/format';
@@ -18,33 +19,41 @@ const SHIPPING_RATES = {
 export const Checkout = () => {
     const { cartItems, getCartTotal, clearCart } = useCart();
     const { user } = useAuth();
+    const { placeOrder } = useOrders();
     const navigate = useNavigate();
 
     const [shippingSector, setShippingSector] = useState('');
+    const [address, setAddress] = useState('');
     const [paymentStep, setPaymentStep] = useState(false); // false = info, true = payment
+    const [isProcessing, setIsProcessing] = useState(false);
 
     // Redirect if not logged in
     useEffect(() => {
         if (!user) {
-            // In a real app we would pass the return URL
             navigate('/login');
         }
-        if (cartItems.length === 0) {
+        if (cartItems.length === 0 && !isProcessing) {
             navigate('/products');
         }
-    }, [user, cartItems, navigate]);
+    }, [user, cartItems, navigate, isProcessing]);
 
-    if (!user) return null; // Avoid flicker
+    if (!user) return null;
 
     const shippingCost = shippingSector ? SHIPPING_RATES[shippingSector].price : 0;
     const total = getCartTotal() + shippingCost;
 
     const handlePlaceOrder = (e) => {
         e.preventDefault();
+        setIsProcessing(true);
+
         // Simulate API call
         setTimeout(() => {
+            const order = placeOrder(cartItems, total, {
+                ...user,
+                address: `${address}, ${SHIPPING_RATES[shippingSector].label}`
+            });
             clearCart();
-            navigate('/success');
+            navigate('/success', { state: { orderId: order.id } });
         }, 1500);
     };
 
@@ -63,7 +72,13 @@ export const Checkout = () => {
                                     <Input label="Nombre" defaultValue={user.name.split(' ')[0]} required />
                                     <Input label="Apellido" defaultValue={user.name.split(' ')[1] || ''} required />
                                 </div>
-                                <Input label="Dirección" placeholder="Av. Providencia 1234, Depto 501" required />
+                                <Input
+                                    label="Dirección"
+                                    placeholder="Av. Providencia 1234, Depto 501"
+                                    value={address}
+                                    onChange={(e) => setAddress(e.target.value)}
+                                    required
+                                />
 
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                                     <label style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--color-text-secondary)' }}>Comuna de Despacho</label>
@@ -117,8 +132,8 @@ export const Checkout = () => {
                                     </div>
                                 </div>
 
-                                <Button type="submit" size="lg" style={{ width: '100%' }}>
-                                    Pagar {formatPrice(total)}
+                                <Button type="submit" size="lg" style={{ width: '100%' }} disabled={isProcessing}>
+                                    {isProcessing ? 'Procesando...' : `Pagar ${formatPrice(total)}`}
                                 </Button>
                             </form>
                         </div>
