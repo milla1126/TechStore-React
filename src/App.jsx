@@ -8,6 +8,7 @@ import { Profile } from './pages/Profile';
 import { Checkout } from './pages/Checkout';
 import { OrderSuccess } from './pages/OrderSuccess';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { AdminProfile } from './pages/AdminProfile';
 
 import { CartPage } from './pages/CartPage';
 
@@ -45,6 +46,7 @@ function App() {
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/success" element={<OrderSuccess />} />
                     <Route path="/admin" element={<AdminDashboard />} />
+                    <Route path="/admin-profile" element={<AdminProfile />} />
                 </Route>
             </Routes>
         </Router>

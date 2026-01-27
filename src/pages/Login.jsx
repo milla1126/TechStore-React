@@ -10,10 +10,28 @@ export const Login = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
 
+    const [error, setError] = useState('');
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        login(email);
-        navigate('/profile');
+        setError('');
+
+        const result = login(email, password);
+
+        if (result.success) {
+            // Check role from technical state or localstorage
+            const normalizedEmail = email.trim().toLowerCase();
+            const storedUsers = JSON.parse(localStorage.getItem('techstore_users') || '[]');
+            const user = storedUsers.find(u => u.email.toLowerCase() === normalizedEmail);
+
+            if (user?.role === 'admin') {
+                navigate('/admin-profile');
+            } else {
+                navigate('/profile');
+            }
+        } else {
+            setError(result.message);
+        }
     };
 
     return (
@@ -38,6 +56,21 @@ export const Login = () => {
                 <p style={{ color: 'var(--color-text-secondary)', textAlign: 'center', marginBottom: '2rem' }}>
                     Inicia sesión para continuar
                 </p>
+
+                {error && (
+                    <div style={{
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        color: 'var(--color-error)',
+                        padding: '0.75rem',
+                        borderRadius: 'var(--radius-md)',
+                        marginBottom: '1rem',
+                        fontSize: '0.875rem',
+                        textAlign: 'center',
+                        border: '1px solid var(--color-error)'
+                    }}>
+                        {error}
+                    </div>
+                )}
 
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     <Input

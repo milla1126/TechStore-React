@@ -1,17 +1,32 @@
+import React, { useState } from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
+import { useProducts } from '../context/ProductContext';
 import { CartSidebar } from '../features/cart/CartSidebar';
-import { useState } from 'react';
-
 export const MainLayout = () => {
     const { setIsCartOpen, getCartCount, getCartTotal } = useCart();
+    const { user } = useAuth();
+    const { products } = useProducts();
     const navigate = useNavigate();
+
     const [searchTerm, setSearchTerm] = useState('');
+    const [showSuggestions, setShowSuggestions] = useState(false);
+
+    const suggestions = searchTerm.length > 1
+        ? products.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase())).slice(0, 5)
+        : [];
 
     const handleSearch = (e) => {
         e.preventDefault();
-        // In a real app, this would filter/search
+        setShowSuggestions(false);
         navigate(`/products?search=${searchTerm}`);
+    };
+
+    const handleSuggestionClick = (productId) => {
+        setSearchTerm('');
+        setShowSuggestions(false);
+        navigate(`/product/${productId}`);
     };
 
     return (
@@ -44,13 +59,17 @@ export const MainLayout = () => {
                     </Link>
 
                     {/* Search Bar - Retail Centerpiece */}
-                    <div style={{ flex: 1, maxWidth: '600px' }}>
+                    <div style={{ flex: 1, maxWidth: '600px', position: 'relative' }}>
                         <form onSubmit={handleSearch} style={{ display: 'flex' }}>
                             <input
                                 type="text"
                                 placeholder="¿Qué estás buscando hoy?"
                                 value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
+                                onChange={(e) => {
+                                    setSearchTerm(e.target.value);
+                                    setShowSuggestions(true);
+                                }}
+                                onFocus={() => setShowSuggestions(true)}
                                 style={{
                                     width: '100%',
                                     padding: '0.75rem 1rem',
@@ -70,11 +89,64 @@ export const MainLayout = () => {
                                 🔍
                             </button>
                         </form>
+
+                        {/* Autocomplete Dropdown */}
+                        {showSuggestions && suggestions.length > 0 && (
+                            <div style={{
+                                position: 'absolute',
+                                top: '100%',
+                                left: 0,
+                                right: 0,
+                                backgroundColor: 'white',
+                                borderRadius: '0 0 var(--radius-md) var(--radius-md)',
+                                boxShadow: 'var(--shadow-lg)',
+                                zIndex: 100,
+                                overflow: 'hidden',
+                                marginTop: '2px',
+                                border: '1px solid var(--color-bg-surface)'
+                            }}>
+                                {suggestions.map(product => (
+                                    <div
+                                        key={product.id}
+                                        onClick={() => handleSuggestionClick(product.id)}
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '1rem',
+                                            padding: '0.75rem 1rem',
+                                            cursor: 'pointer',
+                                            borderBottom: '1px solid var(--color-bg-surface)',
+                                            color: 'var(--color-text-primary)',
+                                            transition: 'background-color 0.2s'
+                                        }}
+                                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-bg-surface)'}
+                                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
+                                    >
+                                        <img src={product.image} alt="" style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '4px' }} />
+                                        <div>
+                                            <p style={{ fontWeight: 600, fontSize: '0.9rem', margin: 0 }}>{product.name}</p>
+                                            <p style={{ fontSize: '0.8rem', color: 'var(--color-primary)', margin: 0, fontWeight: 'bold' }}>
+                                                {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }).format(product.price)}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                                <div
+                                    onClick={handleSearch}
+                                    style={{ padding: '0.75rem', textAlign: 'center', backgroundColor: 'var(--color-bg-surface)', fontSize: '0.8rem', color: 'var(--color-primary)', fontWeight: 'bold', cursor: 'pointer' }}
+                                >
+                                    Ver todos los resultados para "{searchTerm}"
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Overlay to close suggestions */}
+                        {showSuggestions && <div onClick={() => setShowSuggestions(false)} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 90 }} />}
                     </div>
 
                     {/* User Actions - Cart & Account */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginLeft: 'auto' }}>
-                        <Link to="/profile" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: '0.75rem', cursor: 'pointer', color: 'white', textDecoration: 'none' }}>
+                        <Link to={user?.role === 'admin' ? '/admin-profile' : '/profile'} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: '0.75rem', cursor: 'pointer', color: 'white', textDecoration: 'none' }}>
                             <span style={{ fontSize: '1.25rem' }}>👤</span>
                             <span>Mi Cuenta</span>
                         </Link>

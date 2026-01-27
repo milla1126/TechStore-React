@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { products } from '../features/catalog/data';
+import { useProducts } from '../context/ProductContext';
 import { formatPrice } from '../utils/format';
 import { Button } from '../components/Button';
 import { useCart } from '../context/CartContext';
@@ -10,8 +10,9 @@ export const ProductDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { addToCart } = useCart();
+    const { getProductById } = useProducts();
     const [showModal, setShowModal] = useState(false);
-    const product = products.find(p => p.id === parseInt(id));
+    const product = getProductById(id);
 
     // State for selected variants
     const [selections, setSelections] = useState(() => {

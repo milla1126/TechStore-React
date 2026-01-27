@@ -24,8 +24,17 @@ export const Register = () => {
             alert("Las contraseñas no coinciden");
             return;
         }
-        register({ name: formData.name, email: formData.email });
-        navigate('/profile');
+        const result = register({
+            name: formData.name,
+            email: formData.email,
+            password: formData.password
+        });
+
+        if (result.success) {
+            navigate('/profile');
+        } else {
+            alert(result.message);
+        }
     };
 
     return (
