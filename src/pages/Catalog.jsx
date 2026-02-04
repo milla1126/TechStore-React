@@ -15,7 +15,7 @@ export const Catalog = () => {
         else setActiveCategory('Todos');
     }, [searchParams]);
 
-    const categories = ['Todos', 'Ofertas', 'Paquetes', ...new Set(products.map(p => p.category))];
+    const categories = ['Todos'];
 
     const filteredProducts = products.filter(p => {
         if (activeCategory === 'Todos') return true;
@@ -76,8 +76,8 @@ export const Catalog = () => {
                 gap: '2rem'
             }}>
                 {filteredProducts.map(product => (
-                    <ProductCard key={product.id} product={product} />
-                ))}
+                  <ProductCard key={product._id} product={product} />
+               ))}
             </div>
 
             {filteredProducts.length === 0 && (

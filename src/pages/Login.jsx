@@ -12,27 +12,25 @@ export const Login = () => {
 
     const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setError('');
+    const handleSubmit = async (e) => {
+       e.preventDefault();
 
-        const result = login(email, password);
+      try {
+        const data = await loginUser(
+          formData.email,
+          formData.password
+       );
 
-        if (result.success) {
-            // Check role from technical state or localstorage
-            const normalizedEmail = email.trim().toLowerCase();
-            const storedUsers = JSON.parse(localStorage.getItem('techstore_users') || '[]');
-            const user = storedUsers.find(u => u.email.toLowerCase() === normalizedEmail);
+        localStorage.setItem("token", data.token);
 
-            if (user?.role === 'admin') {
-                navigate('/admin-profile');
-            } else {
-                navigate('/profile');
-            }
-        } else {
-            setError(result.message);
-        }
-    };
+        setUser(data.user); // desde AuthContext
+
+       navigate("/");
+    } catch (error) {
+      alert("Correo o contraseña incorrectos");
+    }
+};
+
 
     return (
         <div className="container" style={{

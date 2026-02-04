@@ -3,7 +3,7 @@ import { MainLayout } from './layouts/MainLayout';
 import { Catalog } from './pages/Catalog';
 import { ProductDetail } from './pages/ProductDetail';
 import { Login } from './pages/Login';
-import { Register } from './pages/Register';
+import Register from "./pages/Register";
 import { Profile } from './pages/Profile';
 import { Checkout } from './pages/Checkout';
 import { OrderSuccess } from './pages/OrderSuccess';
